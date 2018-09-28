@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><bookCatalogue>
+	<book>
+		<title>Yogasana Vijnana: the Science of Yoga</title>
+		<author>Dhirendra Brahmachari</author>
+		<date>1966</date>
+		<ISBN>81-40-34319-4</ISBN>
+		<publisher>Dhirendra Yoga Publications</publisher>
+		<Cost currency="EUR">11.50</Cost>
+	</book>
+	<book>
+		<title>The First and Last Freedom</title>
+		<author>J. Krishnamurti</author>
+		<date>1954</date>
+		<ISBN>0-06-064831-7</ISBN>
+		<publisher>Harper &amp; Row</publisher>
+		<cost currency="USD">2.95</cost>
+	</book>
+<Book><Title>Incredible book about Java</Title><Author>Saburov Anton</Author><Date>2015</Date><ISBN>0-06-999999-9</ISBN><Publisher>Java-Course publisher</Publisher><Cost currency="RUB">499</Cost></Book></bookCatalogue>

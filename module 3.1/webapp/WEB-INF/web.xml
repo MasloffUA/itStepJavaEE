@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>module 3.1</display-name>
+
+	<!-- объявление сервлета -->
+	<servlet>
+		<servlet-name>helloWorld</servlet-name>
+		<servlet-class>ua.step.servlets.Servlet1</servlet-class>
+	</servlet>
+
+	<!-- связываение сервлета с адресом, который он будет обрабатывать. -->
+	<servlet-mapping>
+		<servlet-name>helloWorld</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+	
+	<!-- задание контекста -->
+	<context-param>
+		<param-name>dbname</param-name>
+		<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>
+	</context-param>
+	
+	<!-- объявление стартовой страницы -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
