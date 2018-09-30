@@ -1,4 +1,4 @@
-package fileServer;
+package common;
 
 import java.io.File;
 import java.io.Serializable;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import server.ServerFileFormat;
 
 // Объект-запрос, который гоняется от сервера к клиенту и обратно и может содержать, всё что необходимо.
 // Распознаётся по по типу запроса (как делал в чате тип сообщений).
@@ -18,12 +20,14 @@ public class Request implements Serializable {
 	private RequestType type;
 	private String message; // дополнительная информация (возможно для дилоговых окон)
 	private ServerFileFormat serverFileFormat; // для передачи файла в запросе
-	private Map<Integer, ServerFileFormat> fileList; // для передачи списка файлов
-	private Set<Integer> fileOperationList;
+
 	private boolean accepted;
 	private byte[] fileInBytes;
 	private static AtomicInteger item = new AtomicInteger(0);
 	private int numberOfRequest;
+	
+	private Map<Integer, ServerFileFormat> fileList; // для передачи списка файлов
+	private Set<Integer> fileOperationList;
 	private Set<Integer> canDeleted;
 	private File file;
 

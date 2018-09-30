@@ -1,8 +1,10 @@
-package fileServer;
+package server;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import server.gui.ServerTableModel;
 
 public class ServerFileFormat implements Serializable {
 	/**
@@ -12,14 +14,14 @@ public class ServerFileFormat implements Serializable {
 	private static AtomicInteger atomicInteger = new AtomicInteger(1100);
 	private int code;
 	private File file;
-	private String name;
+	private String fileName;
 	private int size;
 	private boolean canDeleted;
 	private String description;
 	
 	public ServerFileFormat(File file) {
 		this.file = file;
-		name = file.getName();
+		fileName = file.getName();
 		size = (int) (file.length() / 1024);
 		code = atomicInteger.incrementAndGet();
 		description="";
@@ -27,10 +29,11 @@ public class ServerFileFormat implements Serializable {
 	
 	public ServerFileFormat(File file, boolean canDeleted) {
 		this.file = file;
-		name = file.getName();
+		fileName = file.getName();
 		size = (int) (file.length() / 1024);
 		this.canDeleted = canDeleted;
 	}
+	
 
 	public boolean isCanDeleted() {
 		return canDeleted;
@@ -45,7 +48,7 @@ public class ServerFileFormat implements Serializable {
 	}
 
 	public String getName() {
-		return name;
+		return fileName;
 	}
 
 	public int getSize() {
@@ -57,18 +60,20 @@ public class ServerFileFormat implements Serializable {
 	}
 
 	public void setDescription(String description) {
+		this.description = null;
 		this.description = description;
 	}
-	
 
+	public String getFileName() {
+		return fileName;
+	}
 
-	public File getFile() {
+	public File getFile(ServerTableModel m) {
 		return file;
 	}
 	
 	
 	
 	
-
 	
 }

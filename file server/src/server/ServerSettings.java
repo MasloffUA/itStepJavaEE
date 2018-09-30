@@ -1,4 +1,23 @@
-package fileServer;
+package server;
+
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  Заготовка на будущее
+ *  Не активна
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
 
 import java.awt.Dimension;
 
@@ -22,9 +41,9 @@ public class ServerSettings extends JFrame {
 	public ServerSettings() {
 		set = this;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		portText.setText(Integer.toString(Server.getPort()));
-		maxSizeText.setText(Integer.toString(Server.getMaxSize()));
-		maxConnectionsText.setText(Integer.toString(Server.getMaxConnections()));
+		//portText.setText(Integer.toString(Server.getPort()));
+		//maxSizeText.setText(Integer.toString(Server.getMaxSize()));
+		//maxConnectionsText.setText(Integer.toString(Server.getMaxConnections()));
 		set.setResizable(false);
 		this.setBounds(300, 300, 350, 150);
 		Dimension labelSize = new Dimension(175, 25);

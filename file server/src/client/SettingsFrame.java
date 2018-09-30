@@ -1,8 +1,6 @@
-package fileServer;
+package client;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ClientSettings extends JFrame{
-	private ClientSettings set;
+public class SettingsFrame extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SettingsFrame set;
 	private JLabel ipLabel = new JLabel("Адрес сервера:");
 	private JLabel portLabel = new JLabel("Порт сервера:");
 	private JTextField ipText = new JTextField();
@@ -21,7 +23,7 @@ public class ClientSettings extends JFrame{
 	private JButton ok = new JButton("Save");
 	private JButton cancel = new JButton("Cancel");
 	
-	public ClientSettings() {
+	public SettingsFrame() {
 		set = this;
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		set.setBounds(300,300,280,130);
@@ -60,15 +62,15 @@ public class ClientSettings extends JFrame{
 	
 		this.setVisible(true);
 		
-		ipText.setText(Client.getServerIp());
-		portText.setText(Integer.toString(Client.getServerPort()));
+		ipText.setText(Settings.getServerIp());
+		portText.setText(Integer.toString(Settings.getServerPort()));
 		
 		ok.addActionListener(new ActionListener() {		
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Client.setServerIp(ipText.getText());
-				Client.setServerPort(Integer.parseInt(portText.getText()));
+				Settings.setServerIp(ipText.getText());
+				Settings.setServerPort(Integer.parseInt(portText.getText()));
 				set.dispose();
 			}
 		});

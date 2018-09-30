@@ -1,4 +1,4 @@
-package fileServer;
+package common;
 
 public enum RequestType {
 	// Запросы, отправляемые клиентом
@@ -9,15 +9,14 @@ public enum RequestType {
 	
 	// Запросы, отправляемые сервером
 	SEND_FILE_DESCRIPTION,
-	ACCEPTED,//unused
-	SEND_FILE_LIST,
-	SEND_FILE,//unused
-	CAN_UPLOAD,
+	ACCEPTED_UPLOAD,//unused
 	FORBID_UPLOAD,
+	SEND_FILE_LIST,
+	SEND_FILE,
+	CAN_UPLOAD,
 	CONNECTED,
 	FORBIDED_UPLOAD_MAX_SIZE,//unused
 	FORBIDED_UPLOAD_TOTAL_SPACE,//unused
 	
-	// Оба направления
-	FILE; //unused
+
 }
