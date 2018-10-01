@@ -6,9 +6,9 @@ import java.util.Set;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import common.gui.ServerFileFormat;
 import server.Controller;
 import server.Server;
-import server.ServerFileFormat;
 
 public class ServerTableModelListener implements TableModelListener{
 	private ServerTable table;

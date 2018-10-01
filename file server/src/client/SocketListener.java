@@ -49,7 +49,7 @@ public class SocketListener extends Thread  implements Closeable{
 			outputStream.flush();
 			//System.out.println("Запрос на получение файла отправлен клиентом");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

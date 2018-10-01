@@ -23,8 +23,8 @@ import client.gui.EastPanelBox;
 
 import common.Request;
 import common.RequestType;
+import common.gui.ServerFileFormat;
 import common.gui.Window;
-import server.ServerFileFormat;
 
 public class Client extends Window{
 	/**

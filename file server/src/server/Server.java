@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 
 import common.Request;
 import common.RequestType;
+import common.gui.ServerFileFormat;
 import common.gui.Window;
 
 import server.gui.EastPanelBox;
@@ -39,6 +40,7 @@ public class Server extends Window {
 	private static File file;
 	private static JFileChooser fileChooser = new JFileChooser();
 	private static EastPanelBox eastPanelBox;
+	private static Set<File> fileList = new HashSet<>();
 	
 	private static boolean online = false;
 	private static ServerLoopThread serverLoop;
@@ -140,9 +142,12 @@ public class Server extends Window {
 	
 	
 	public static void putInSharedFileList(File file) {
-		ServerFileFormat newFile = new ServerFileFormat(file);
-		sharedFileList.put(newFile.getCode(), newFile);
-		System.out.println(sharedFileList.size());
+		if (!fileList.contains(file)) {
+			ServerFileFormat newFile = new ServerFileFormat(file);
+			fileList.add(file);
+			sharedFileList.put(newFile.getCode(), newFile);
+		}
+
 	}
 	
 	public static void unShareFile() {
@@ -273,6 +278,10 @@ public class Server extends Window {
 
 	public static EastPanelBox getEastPanelBox() {
 		return eastPanelBox;
+	}
+
+	public static Set<File> getFileList() {
+		return fileList;
 	}
 	
 	

@@ -7,9 +7,9 @@ import java.util.Set;
 
 import javax.swing.table.DefaultTableModel;
 
+import common.gui.ServerFileFormat;
 import server.Controller;
 import server.Server;
-import server.ServerFileFormat;
 
 public class ServerTableModel extends DefaultTableModel{
 	

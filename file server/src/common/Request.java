@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import server.ServerFileFormat;
+import common.gui.ServerFileFormat;
 
 // Объект-запрос, который гоняется от сервера к клиенту и обратно и может содержать, всё что необходимо.
 // Распознаётся по по типу запроса (как делал в чате тип сообщений).

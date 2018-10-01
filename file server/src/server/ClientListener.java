@@ -68,7 +68,7 @@ public class ClientListener extends Thread implements Closeable {
 			outputStream.writeObject(request);
 			outputStream.flush();
 		} catch (IOException e) {
-			System.out.println("ClientListener: send request CATCH");
+			//System.out.println("ClientListener: send request CATCH");
 			e.printStackTrace();
 		}
 		
@@ -95,8 +95,14 @@ public class ClientListener extends Thread implements Closeable {
 	}
 	
 	public void reciveFile(Request request) {
-		
-		File file = new File(Server.getUploadFolder()+"\\"+request.getMessage());
+		String path = Server.getUploadFolder()+"\\";
+		String fileName = request.getMessage();
+		File file;
+		do {
+			System.out.println("DO WHILE");
+			file= new File(path + fileName);
+			fileName = "1+" + fileName;
+		} while(Server.getFileList().contains(file));
 			try(FileOutputStream fos = new FileOutputStream(file)){
 				//System.out.println(file.getAbsolutePath());
 				fos.write(request.getFileInBytes());
@@ -109,7 +115,7 @@ public class ClientListener extends Thread implements Closeable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		System.out.println("Приём файла окончен");
+		//System.out.println("Приём файла окончен");
 		Controller.updateTable();
 		Server.sendFileListToAll();
 	}
