@@ -17,6 +17,8 @@ public class Task01 {
 			e.printStackTrace();
 		}
 		
+		
+		
 /*		try {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
 		} catch (SQLException e) {
