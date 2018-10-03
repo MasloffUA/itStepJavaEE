@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import client.Client;
 import client.Controller;
 import client.SettingsFrame;
 import client.SocketListener;
@@ -40,8 +41,8 @@ public class ButtonListener implements ActionListener {
 			Controller.removeFiles();
 		}
 		else if (button == buttonBox.getSettings()) {
-			SettingsFrame frame = new SettingsFrame();
-			frame.setVisible(true);
+			Client.setSettings();
+
 		}
 		
 	}

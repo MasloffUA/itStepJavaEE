@@ -79,7 +79,6 @@ public class ServerTableModel extends DefaultTableModel{
 			this.setValueAt(f.getDescription(), row, 4);
 			this.setValueAt(f.isCanDeleted(),row,5);
 			row++;
-
 		}
 		
 		this.fireTableDataChanged();

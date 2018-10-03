@@ -40,11 +40,10 @@ public class Server extends Window {
 	private static File file;
 	private static JFileChooser fileChooser = new JFileChooser();
 	private static EastPanelBox eastPanelBox;
-	private static Set<File> fileList = new HashSet<>();
-	
+	private static Set<File> fileList = new HashSet<>();	
 	private static boolean online = false;
 	private static ServerLoopThread serverLoop;
-	
+	private static Server server;
 	
 	public Server(String name) {
 		super(name);
@@ -57,7 +56,7 @@ public class Server extends Window {
 	}
 
 	public static void main(String[] args) {
-		Server server = new Server("File Server");
+		server = new Server("File Server");
 		
 		Controller.setServer(server);
 	}
@@ -282,6 +281,11 @@ public class Server extends Window {
 
 	public static Set<File> getFileList() {
 		return fileList;
+	}
+
+	public static void setSettings() {
+		new server.gui.settings.ServerSettings().setLocationRelativeTo(server);
+		
 	}
 	
 	

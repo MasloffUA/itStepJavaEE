@@ -27,7 +27,7 @@ public class ButtonListener implements ActionListener {
 			Server.stopServerLoop();
 		}
 		else if (button == buttonBox.getSettings()) {
-			// Написать код
+			Server.setSettings();
 		}
 		else if (button == buttonBox.getApply()) {
 			Server.applyNewPermissions();

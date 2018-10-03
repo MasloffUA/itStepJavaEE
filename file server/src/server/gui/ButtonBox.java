@@ -64,9 +64,7 @@ public class ButtonBox extends Box{
 		buttonList.remove(shareFolder);
 		buttonList.remove(shareFile);
 		
-		// Заготовки на будущее
-		
-		settings.setVisible(false);
+		// Заготовка с СЕТИИНГС
 	
 		stop.setEnabled(false);
 		apply.setEnabled(false);

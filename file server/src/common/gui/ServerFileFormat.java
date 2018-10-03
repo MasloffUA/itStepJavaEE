@@ -2,6 +2,7 @@ package common.gui;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import server.gui.ServerTableModel;
@@ -18,6 +19,11 @@ public class ServerFileFormat implements Serializable {
 	private int size;
 	private boolean canDeleted;
 	private String description;
+	
+	private String userName; // имя пользователя, загрузившего файл
+	private Date uploadDate; // дата/время загрузки
+	private Integer totalDownloads; // количество скачиваний
+	private Date lastDownloadDate; // время последней загрузки
 	
 	public ServerFileFormat(File file) {
 		this.file = file;
@@ -71,8 +77,38 @@ public class ServerFileFormat implements Serializable {
 	public File getFile(ServerTableModel m) {
 		return file;
 	}
-	
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Date getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
+	}
+
+	public Integer getTotalDownloads() {
+		return totalDownloads;
+	}
+
+	public void setTotalDownloads(Integer totalDownloads) {
+		this.totalDownloads = totalDownloads;
+	}
+
+	public Date getLastDownloadDate() {
+		return lastDownloadDate;
+	}
+
+	public void setLastDownloadDate(Date lastDownloadDate) {
+		this.lastDownloadDate = lastDownloadDate;
+	}	
 	
 	
 	

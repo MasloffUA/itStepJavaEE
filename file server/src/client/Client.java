@@ -37,6 +37,7 @@ public class Client extends Window{
 	private static Set<Integer> canDeleted;
 	private static EastPanelBox eastPanelBox;
 	private static SocketListener socketListener;
+	private static Client client;
 	
 	private Client(String name){
 		super(name);
@@ -48,11 +49,14 @@ public class Client extends Window{
 	}
 
 	public static void main(String[] args) {
-		Client client  = new Client("Client for FileServer");
+		client  = new Client("Client for FileServer");
 		client.setVisible(true);
 	}
 	
+	// Переписать метод так, чтобы диалоговое окно вспылвало только один раз перед загрузкой
+	// И дальше все файлы сохранялись в выбранную папку
 	public static void reciveFile(Request request) {
+		
 		String fileName = request.getMessage();
 		byte[] fileInBytes = request.getFileInBytes();
 		JFileChooser chooser = new JFileChooser();
@@ -145,6 +149,12 @@ public class Client extends Window{
 
 	public static void setSocketListener(SocketListener socketListener) {
 		Client.socketListener = socketListener;
+	}
+
+	public static void setSettings() {
+		SettingsFrame settingsFrame = new SettingsFrame();
+		settingsFrame.setLocationRelativeTo(client);
+		settingsFrame.setVisible(true);	
 	}
 
 	
