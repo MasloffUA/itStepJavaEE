@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import common.Request;
@@ -252,7 +253,6 @@ public class Server extends Window {
 		return removingSelectedFiles;
 	}
 	
-	
 
 	public static Set<Integer> getUnRemovingSelectedFiles() {
 		return unRemovingSelectedFiles;
@@ -266,6 +266,10 @@ public class Server extends Window {
 			Server.sendRequestAll(new Request(RequestType.FORBID_UPLOAD));
 		}
 		Controller.updateButtons();
+	}
+	
+	public static void createMessage(String head, String message) {
+		JOptionPane.showMessageDialog(server, message, head, JOptionPane.CANCEL_OPTION);
 	}
 
 	private static void sendRequestAll(Request request) {
@@ -285,7 +289,6 @@ public class Server extends Window {
 
 	public static void setSettings() {
 		new server.gui.settings.ServerSettings().setLocationRelativeTo(server);
-		
 	}
 	
 	

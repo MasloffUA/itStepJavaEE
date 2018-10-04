@@ -36,7 +36,13 @@ public class SocketListener extends Thread  implements Closeable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			Controller.createMessage("Сервер не доступен", "Ошибка соединения");
+			Client.createMessage("Ошибка соединения", "Сервер не доступен");
+			try {
+				close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} finally {
 			//Controller.setSocketListener(null);
 			Controller.updateButtons();
@@ -69,9 +75,12 @@ public class SocketListener extends Thread  implements Closeable{
 			Controller.changeUploadPermission(false);
 			break;
 		case SEND_FILE:
+		case CONTINUE_SENDING_FILES:
 			Controller.reciveFiles(request);
+			break;	
+		case MESSAGE:
+			Controller.createMessage(request);
 			break;
-
 		case FORBIDED_UPLOAD_MAX_SIZE:
 			break;
 		case FORBIDED_UPLOAD_TOTAL_SPACE:

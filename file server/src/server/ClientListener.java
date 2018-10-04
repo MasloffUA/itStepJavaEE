@@ -75,28 +75,41 @@ public class ClientListener extends Thread implements Closeable {
 	}
 	
 	public void sendFiles(Set<Integer> list) {
+		boolean firstFile = true;
+		Request request;
 		for (Integer i : list) {
 			if (Server.getSharedFileList().containsKey(i)) {
 				File file = Server.getSharedFileList().get(i).getFile(Controller.getModel());
 				synchronized (file) {
 					Path currentFile = Paths.get(file.getAbsolutePath());
 						try {
-							byte[] data = Files.readAllBytes(currentFile);
-							Request request = new Request(RequestType.SEND_FILE);
+							byte[] data = Files.readAllBytes(currentFile);		
+							if (firstFile) {
+								request = new Request(RequestType.SEND_FILE);
+							}
+							else {
+								request = new Request(RequestType.CONTINUE_SENDING_FILES);
+							}
 							request.setFileInBytes(data);
-							request.setMessage(file.getName());
+							request.setMessageData(file.getName());
 							sendRequest(request);
+							firstFile = false;
 						} catch (IOException e) {
 
 					}
 				}
 			}
 		}
+		request = new Request(RequestType.MESSAGE);
+		request.setMessageHead("Загрузка завершена");
+		request.setMessageData("Все файлы успешно загружены");
+		sendRequest(request);
+		
 	}
 	
 	public void reciveFile(Request request) {
 		String path = Server.getUploadFolder()+"\\";
-		String fileName = request.getMessage();
+		String fileName = request.getMessageData();
 		File file;
 		do {
 			System.out.println("DO WHILE");

@@ -21,6 +21,7 @@ public class ButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
 		if (button == buttonBox.getStart()) {
+			buttonBox.getStart().setEnabled(false);
 			Server.createServerLoop();
 		}
 		else if (button == buttonBox.getStop()) {

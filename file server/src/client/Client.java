@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import client.gui.ClientTable;
@@ -38,6 +39,7 @@ public class Client extends Window{
 	private static EastPanelBox eastPanelBox;
 	private static SocketListener socketListener;
 	private static Client client;
+	private static File downloadDirectory;
 	
 	private Client(String name){
 		super(name);
@@ -53,32 +55,36 @@ public class Client extends Window{
 		client.setVisible(true);
 	}
 	
-	// Переписать метод так, чтобы диалоговое окно вспылвало только один раз перед загрузкой
-	// И дальше все файлы сохранялись в выбранную папку
+	
 	public static void reciveFile(Request request) {
-		
-		String fileName = request.getMessage();
-		byte[] fileInBytes = request.getFileInBytes();
 		JFileChooser chooser = new JFileChooser();
-		chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
-		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.setSelectedFile(new File(fileName));
-        
-		if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			try(FileOutputStream fos = new FileOutputStream(chooser.getSelectedFile())){
-				fos.write(fileInBytes);
-				fos.flush();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (request.getType() == RequestType.SEND_FILE) {
+			chooser.setFileSelectionMode(JFileChooser.SAVE_DIALOG);
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
+			if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+				downloadDirectory = chooser.getSelectedFile();
+				writeRecivedFile(request);
+			}		
 		}
-		Controller.resetSelectedFiles();
-		
-		
+		else if (request.getType() == RequestType.CONTINUE_SENDING_FILES) {
+			writeRecivedFile(request);
+		}
+		Controller.resetSelectedFiles();	
+	}
+	
+	// Дописать проверку на существование файла
+	public static void  writeRecivedFile(Request request) {
+		System.out.println(downloadDirectory.getAbsolutePath());
+		File writingFile = new File(downloadDirectory.getAbsolutePath() + "\\" + request.getMessageData());
+		try(FileOutputStream fos = new FileOutputStream(writingFile)){
+			fos.write(request.getFileInBytes());
+			fos.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void getFileList() {
@@ -88,6 +94,9 @@ public class Client extends Window{
 	public static void downloadFiles() {
 		Request request = new Request(RequestType.GET_FILE);
 		request.setFileOperationList(selectedFiles);
+		Set<Integer> temp = new HashSet<>();
+		temp.addAll(selectedFiles);
+		selectedFiles = temp;
 		Controller.sendRequest(request);
 	}
 	
@@ -101,7 +110,7 @@ public class Client extends Window{
 				byte [] data = Files.readAllBytes(path);
 				Request request = new Request(RequestType.UPLOAD_FILE);
 				request.setFileInBytes(data);
-				request.setMessage(file.getName());
+				request.setMessageData(file.getName());
 				Controller.sendRequest(request);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -116,6 +125,18 @@ public class Client extends Window{
 		System.out.println(sharedFileList.size());
 		canDeleted = request.getCanDeleted();
 		Controller.updateTable();
+	}
+	
+	
+	public static void setSettings() {
+		SettingsFrame settingsFrame = new SettingsFrame();
+		settingsFrame.setLocationRelativeTo(client);
+		settingsFrame.setAlwaysOnTop(true);
+		settingsFrame.setVisible(true);	
+	}
+	
+	public static void createMessage(String head, String message) {
+		JOptionPane.showMessageDialog(client, message, head, JOptionPane.CANCEL_OPTION);
 	}
 	
 	public static void setCanUpload(boolean canUpload) {
@@ -151,12 +172,6 @@ public class Client extends Window{
 		Client.socketListener = socketListener;
 	}
 
-	public static void setSettings() {
-		SettingsFrame settingsFrame = new SettingsFrame();
-		settingsFrame.setLocationRelativeTo(client);
-		settingsFrame.setVisible(true);	
-	}
 
-	
 	
 }

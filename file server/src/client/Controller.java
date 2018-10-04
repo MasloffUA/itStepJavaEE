@@ -55,9 +55,10 @@ public class Controller {
 		updateButtons();
 	}
 	
-	public static void createMessage(String message, String head) {
+	public static void createMessage(Request request) {
 		// написать
-		//JOptionPane.showMessageDialog(null, "Сервер не доступен", "Ошибка соединения", JOptionPane.CANCEL_OPTION);
+		Client.createMessage(request.getMessageHead(), request.getMessageData());
+		
 	}
 	
 	public static void uploadFiles() {
@@ -130,8 +131,5 @@ public class Controller {
 			return socketListener.getSocket().isConnected();
 		}
 		
-	}
-	
-	
-	
+	}	
 }

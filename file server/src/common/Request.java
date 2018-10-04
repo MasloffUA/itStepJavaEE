@@ -18,7 +18,8 @@ public class Request implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private RequestType type;
-	private String message; // дополнительна€ информаци€ (возможно дл€ дилоговых окон)
+	private String messageHead;
+	private String messageData; // дополнительна€ информаци€ (возможно дл€ дилоговых окон)
 	private ServerFileFormat serverFileFormat; // дл€ передачи файла в запросе
 
 	private boolean accepted;
@@ -55,13 +56,6 @@ public class Request implements Serializable {
 		this.fileOperationList = fileOperationList;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 	public ServerFileFormat getServerFileFormat() {
 		return serverFileFormat;
@@ -105,6 +99,22 @@ public class Request implements Serializable {
 
 	public void setCanDeleted(Set<Integer> canDeleted) {
 		this.canDeleted = canDeleted;
+	}
+
+	public String getMessageHead() {
+		return messageHead;
+	}
+
+	public void setMessageHead(String messageHead) {
+		this.messageHead = messageHead;
+	}
+
+	public String getMessageData() {
+		return messageData;
+	}
+
+	public void setMessageData(String messageData) {
+		this.messageData = messageData;
 	}
 	
 	

@@ -12,37 +12,41 @@ public class ServerLoopThread extends Thread implements Closeable {
 	@Override
 	public void run() {
 		super.run();
-		//int count = 0;
 		try {
 			serverSocket = new ServerSocket(Settings.getPort(), Settings.getMaxConnections());
 			Server.setServerSocket(serverSocket);
 			Controller.updateConnectionStatus();
 		} catch (IOException e) {
-			System.out.println("Порт занят");
-			e.printStackTrace();
+			Server.createMessage("Ошибка запуска сервера", "Выбранный порт занят. Попробуйте выбрать другой порт для сервера.");
+			try {
+				close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		while(true) {
-			//System.out.println("Сервер запущен");
 			ClientListener clientListener;
-			try {
-				clientListener = new ClientListener(serverSocket.accept());
-				//System.out.println("Соединение " + ++count);
-				clientListeners.add(clientListener);
-				clientListener.start();
-			} catch (IOException e) {
+			if (serverSocket!=null) {
+				try {
+					clientListener = new ClientListener(serverSocket.accept());
+					clientListeners.add(clientListener);
+					clientListener.start();
+				} catch (IOException e) {
+					break;
+				} 
+			} else {
 				break;
-			} finally {
-				//System.out.println("Сокет закрыт");
-				
 			}
-
 		}
 	}
 
 	@Override
 	public void close() throws IOException {
 		Server.setServerSocket(null);
-		serverSocket.close();
+		if (serverSocket!=null) {
+			serverSocket.close();
+		}
 		Server.clearServerLoop();
 		//System.out.println("Сокет закрыт closable");
 		Controller.updateButtons();
