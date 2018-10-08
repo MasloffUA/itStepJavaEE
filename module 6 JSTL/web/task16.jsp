@@ -1,0 +1,50 @@
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<html>
+<head>
+<title>JSTL sql:query Tag</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- подготовка соеденения с базой данных  -->
+	<sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://10.2.210.17:3306/TEST" user="admin" password="adminadmin" />
+
+	<!-- выполнение запроса  -->
+	<sql:query dataSource="${snapshot}" var="result">
+      SELECT * from Employees;
+    </sql:query>
+
+	<div class="container">
+		<table class="table">
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Фамилия</th>
+				<th scope="col">Имя</th>
+				<th scope="col">Зарплата</th>
+			</tr>
+			<c:forEach var="row" items="${result.rows}">
+				<tr>
+					<th scope="row"><c:out value="${row.id}" />
+					<td><c:out value="${row.first}" />
+					<td><c:out value="${row.last}" />
+					<td><c:out value="${row.salary/100}" />
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<div align="center">
+		<c:url value="/index.jsp" var="inputURL" />
+		<a href="${inputURL}">Ссылка на главную</a>
+	</div>
+</body>
+</html>
