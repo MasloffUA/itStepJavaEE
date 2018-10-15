@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="saxophone" class="ua.step.example.part3.performer.Saxophone" />
+	
+    <!-- объявление абстрактного компонента -->
+	<bean id="baseSaxophonist" class="ua.step.example.part3.performer.Instrumentalist"
+		abstract="true">
+		<property name="song" value="Jingle Bells" />
+		<property name="instrument" ref="saxophone" />
+	</bean>
+	
+	<!-- объявление бина который наследуюет свойства абстрактного класса -->
+	
+	<bean id="kenny" parent="baseSaxophonist">
+		<constructor-arg value="Кенни" />
+	</bean>
+	
+	<bean id="kail" parent="baseSaxophonist">
+		<constructor-arg value="Кайл" />
+	</bean>
+	
+	<bean id="david" parent="baseSaxophonist">
+		<constructor-arg value="Дэвид" />
+	</bean>
+    <!-- можно изменять свойства которые были установлены в абстрактном классе  -->
+	<bean id="frank" parent="baseSaxophonist">
+		<property name="song" value="Mary had a little lamb" />
+	</bean>
+</beans>

@@ -16,9 +16,9 @@ public class UserBean {
 		List<User> users = new ArrayList<User>();
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			String url = "jdbc:mysql://10.2.210.17:3306/users";
+			String url = "jdbc:mysql://localhost:3306/users?autoReconnect=true&useSSL=false";
 			Connection con = DriverManager.getConnection(url, "admin", "adminadmin");
 			Statement statement = con.createStatement();
 

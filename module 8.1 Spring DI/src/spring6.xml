@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="harry" class="ua.step.example.part3.performer.Magician">
+		<property name="magicBox" ref="magicBox" />
+		<property name="magicWords" value="Крибле-крабле-бумс" />
+	</bean>
+	<bean id="magicBox" class="ua.step.example.part3.performer.MagicBoxImpl">
+	
+	<replaced-method name="getContents" replacer="duckReplacer" />
+	</bean>
+	<!-- объявления бина меняющего метод -->
+	<bean id="tigerReplacer" class="ua.step.example.part3.performer.TigerReplacer" />
+	
+	<bean id="duckReplacer" class="ua.step.example.part3.performer.DuckReplacer" />
+</beans>
